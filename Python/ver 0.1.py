@@ -58,7 +58,22 @@ dic2 = {
     25:'y',
     26:'z'
 }
-
+swapdic1 = {
+    'a':'d',
+    'b':'f',
+    'c':'z',
+    'e':'y',
+    'g':'h',
+    'i':'p',
+    'j':'k',
+    'l':'x',
+    'm':'n',
+    'o':'s',
+    'p':'q',
+    'r':'t',
+    's':'u',
+    'v':'w'
+}
 def encryptshift(text, key):
     rtext = ''
     for i in text:
@@ -96,7 +111,15 @@ def decryptshift(text, key):
     return rtext
 
 def enswap(text):
-	placeholder
+    rtext = ''
+    for i in text :
+        i = i.lower()
+        if i == ' ' :
+            rtext += ' '
+        else:
+            i = swapdic1[i]
+            rtext += i
+        return rtext
 
 while True:
 	print('Encrypter/decrypter')
@@ -109,4 +132,15 @@ while True:
 		except: 
 			print('Welp from the top.')
 			continue
-		print('your encrypted message is',encryptshift(inputmess, inputkey))
+		print('your encrypted message is',encryptshift(inputmess, inputkey),'with the key',inputkey)
+    if encryptordecrypt == 'd' and shiftorswap == 'shift':
+		inputmess = input('enter the message you want to decrypt: ')
+		try:
+			inputkey = int(input('Enter the encryption key (whole numbers only and no more than 26 and no negatives.)'))
+		except: 
+			print('Welp from the top.')
+			continue
+		print('your decrypted message is',decryptshift(inputmess, inputkey))
+    if encryptordecrypt == 'd' and shiftorswap == 'swap':
+        inputmess = input('enter the message you want to encrypt: ')
+        print('Your encrypted message is',enswap(inputmess))
