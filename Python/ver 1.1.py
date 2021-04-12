@@ -149,28 +149,20 @@ while True:
         shiftorswap = input(
             'Would you like to use shift or swap algorithim for encryption or decryption? (shift/swap) ')
         if shiftorswap == 'swap':
-            inputmess = input('enter the message you want to encrypt/decrypt: ')
-            print('Your encrypted message is', swap(inputmess))
+            inputmess = input('enter the message you want to encrypt/decrypt: ') #Inputs message
+            print('Your encrypted/decrypted message is', swap(inputmess)) #runs the swap function.
             continue
-        encryptordecrypt = input('Are you encrypting or decrypting? (e/d) ')
+        encryptordecrypt = input('Are you encrypting or decrypting? (e/d) ')  #Asks user if they are encrypting or decrypting
         if encryptordecrypt == 'e' and shiftorswap == 'shift':
-            inputmess = input('enter the message you want to encrypt: ')
-            try:
-                inputkey = int(input(
-                    'Enter the encryption key (whole numbers only and no more than 26 and no negatives.)'))
-            except:
-                print('Welp from the top.')
-                continue
+            inputmess = input('enter the message you want to encrypt: ') #User enters message
+            inputkey = int(input(
+                'Enter the encryption key (whole numbers only and 26 and any multiples of 26 result in no encryption.)')) # user enters key.
             print('your encrypted message is', encryptshift(
-                inputmess, inputkey), 'with the key', inputkey)
+                inputmess, inputkey), 'with the key', inputkey) #Runs function
         if encryptordecrypt == 'd' and shiftorswap == 'shift':
             inputmess = input('enter the message you want to decrypt: ')
-            try:
-                inputkey = int(input(
-                    'Enter the encryption key (whole numbers only and no more than 26 and no negatives.)'))
-            except:
-                print('Welp from the top.')
-                continue
+            inputkey = int(input(
+                'Enter the encryption key (whole numbers only and no more than 26 and no negatives.)'))
             print('your decrypted message is', decryptshift(inputmess, inputkey))
     except:
-        print('An error has occured, please try again from the top. Remember No symbols or numbers in the message.')
+        print('An error has occured, please try again from the top. Remember No symbols or numbers in the message.') #Error handling
