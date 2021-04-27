@@ -142,12 +142,15 @@ def swap(text):
             i = swapdic[i] # Swaps the letter with another one in the alphabet via the swap dic
             rtext += i #appends the swaped letter to the output string.
     return rtext
-
-while True:
+quit = 0
+while quit == 0:
     try:
         print('NOTE: no symbols or numbers in your message.') #Warning
         shiftorswap = input(
-            'Would you like to use shift or swap algorithim for encryption or decryption? (shift/swap) ')
+            'Would you like to use shift or swap algorithim for encryption or decryption? (shift/swap/q for quit) ')
+        if shiftorswap == 'q':
+            quit = 1
+            continue
         if shiftorswap == 'swap':
             inputmess = input('enter the message you want to encrypt/decrypt: ') #Inputs message
             print('Your encrypted/decrypted message is', swap(inputmess)) #runs the swap function.
