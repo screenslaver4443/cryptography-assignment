@@ -147,7 +147,7 @@ while quit == 0:
     try:
         print('NOTE: no symbols or numbers in your message.') #Warning
         shiftorswap = input(
-            'Would you like to use shift or swap algorithim for encryption or decryption? or  (shift/swap/q for quit) ')
+            'Would you like to use shift or swap algorithim for encryption or decryption? or quit? (shift/swap/q for quit) ')
         if shiftorswap == 'q':
             quit = 1
             continue
