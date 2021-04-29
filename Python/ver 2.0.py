@@ -1,5 +1,5 @@
 # Cryptopgraphy assignment
-# Ver 1.1
+# Ver 2.0
 # By Nikolai
 
 #Defining dictionaries.
@@ -89,24 +89,25 @@ swapdic = {
 }
 
 
-def encryptshift(text, key):
-    rtext = '' # defining the variable so that python doesn't get angry and throw a hissy fit.
-    for i in text:
-        i = i.lower() #Setting all the characters to lower case so that the dictionary can handle it.
-        if i == ' ': 
-            rtext += ' ' 
-            #If the character is a space DON'T try to encrypt it.
-        else:
-            textn = dic1[i] #Converts the letter to a number using the first dictionary.
-            int(textn) #Converts the outputted string to a integer.
-            textn += key #Adds the key to the converted character thus shifting it.
-            while textn < 1: 
-                textn += 26
-            while textn > 26:
-                textn -= 26
-            #^^^ the above while loops make sure the numbers dont go beyond the alphabet.
-            texttc = dic2[textn] #converts the shifted number back into a letter via the second dictionary.
-            rtext += texttc #Appends the encrypted character to the final message.
+def encryptshift(text):
+    for key in range(1,3):
+       rtext = '' # defining the variable so that python doesn't get angry and throw a hissy fit.
+       for i in text:
+            i = i.lower() #Setting all the characters to lower case so that the dictionary can handle it.
+            if i == ' ': 
+                rtext += ' ' 
+                #If the character is a space DON'T try to encrypt it.
+            else:
+                textn = dic1[i] #Converts the letter to a number using the first dictionary.
+                int(textn) #Converts the outputted string to a integer.
+                textn += key #Adds the key to the converted character thus shifting it.
+                while textn < 1: 
+                    textn += 26
+                while textn > 26:
+                    textn -= 26
+                #^^^ the above while loops make sure the numbers dont go beyond the alphabet.
+                texttc = dic2[textn] #converts the shifted number back into a letter via the second dictionary.
+                rtext += texttc #Appends the encrypted character to the final message.
     return rtext 
 
 
