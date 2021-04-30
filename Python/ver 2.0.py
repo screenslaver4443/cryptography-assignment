@@ -30,7 +30,7 @@ dic1 = {
     'x': 24,
     'y': 25,
     'z': 26
-}
+	}
 dic2 = {
     1: 'a',
     2: 'b',
@@ -113,10 +113,52 @@ def encryptshift(text, key):
             #^^^ the above while loops make sure the numbers dont go beyond the alphabet.
             texttc = dic2[textn] #converts the shifted number back into a letter via the second dictionary.
             rtext += texttc #Appends the encrypted character to the final message.
-    return rtext 
 
 
 def decryptshift(text, key):
+    rtext = ''  # defining the variable so that python doesn't get angry and throw a hissy fit.
+    for i in text:
+        i = i.lower() #Setting all the characters to lower case so that the dictionary can handle it.
+        if i == ' ':
+            rtext += ' '
+            #If the character is a space DON'T try to encrypt it.
+        else:
+            textn = dic1[i] #Converts the letter to a number using the first dictionary.
+            int(textn) #Converts the outputted string to a integer.
+            textn -= key #Subtracts the key to the converted character thus shifting it.
+            while textn < 1:
+                textn += 26
+            while textn > 26:
+                textn -= 26
+            #^^^ the above while loops make sure the numbers dont go beyond the alphabet.
+            texttc = dic2[textn] #converts the shifted number back into a letter via the second dictionary.
+            rtext += texttc #Appends the decrypted character to the final message.
+        return rtext
+def encryptrotshift(text, key):
+    rtext = '' # defining the variable so that python doesn't get angry and throw a hissy fit.
+    for i in text:
+        i = i.lower() #Setting all the characters to lower case so that the dictionary can handle it.
+        if i == ' ': 
+            rtext += ' ' 
+            #If the character is a space DON'T try to encrypt it.
+        else:
+            textn = dic1[i] #Converts the letter to a number using the first dictionary.
+            int(textn) #Converts the outputted string to a integer.
+            textn += key #Adds the key to the converted character thus shifting it.
+            while textn < 1: 
+                textn += 26
+            while textn > 26:
+                textn -= 26
+            #^^^ the above while loops make sure the numbers dont go beyond the alphabet.
+            texttc = dic2[textn] #converts the shifted number back into a letter via the second dictionary.
+            rtext += texttc #Appends the encrypted character to the final message.
+    return rtext 
+
+
+
+
+
+def decryptrotshift(text, key):
     rtext = ''  # defining the variable so that python doesn't get angry and throw a hissy fit.
     for i in text:
         i = i.lower() #Setting all the characters to lower case so that the dictionary can handle it.
@@ -154,7 +196,7 @@ while quit == 0:
     try:
         print('NOTE: no symbols or numbers in your message.') #Warning
         shiftorswap = input(
-            'Would you like to use shift or swap algorithim for encryption or decryption? or quit? (shift/swap/q for quit) ')
+            'Would you like to use shift, swap, or rotate algorithim for encryption or decryption? or quit? (shift/swap/rotate/q for quit) ')
         if shiftorswap == 'q':
             quit = 1
             continue
@@ -162,13 +204,16 @@ while quit == 0:
             inputmess = input('enter the message you want to encrypt/decrypt: ') #Inputs message
             print('Your encrypted/decrypted message is', swap(inputmess)) #runs the swap function.
             continue
+        elif shiftorswap != 'shift' and shiftorswap != 'rotate':
+           print('Invalid option')
+           continue
         encryptordecrypt = input('Are you encrypting or decrypting? (e/d) ')  #Asks user if they are encrypting or decrypting
-        if encryptordecrypt == 'e' and shiftorswap == 'shift':
+        if encryptordecrypt == 'e' and shiftorswap == 'rotate':
           printlist = []
           inputmess = input('enter the message you want to encrypt: ') #User enters message
           inputkey = 1 #sets key to 0
           for i in inputmess: # gets individual characters from the message to encrypt individually
-               printlist.append(encryptshift(i, inputkey)) #appends encrypted character to a list
+               printlist.append(encryptrotshift(i, inputkey)) #appends encrypted character to a list
                if inputkey >2:
                  inputkey = 1 #resets input key if its 3 or greater
                else:
@@ -177,12 +222,12 @@ while quit == 0:
           for i in printlist:
              ptext += i
           print('Your encrypted message is',ptext+'.') 
-        if encryptordecrypt == 'd' and shiftorswap == 'shift':
+        if encryptordecrypt == 'd' and shiftorswap == 'rotate':
           printlist=[]
           inputmess = input('enter the message you want to decrypt: ') #User enters message
           inputkey = 1 #sets key to 0
           for i in inputmess: # gets individual characters from the message to encrypt individually
-               printlist.append(decryptshift(i, inputkey)) #appends encrypted character to a list
+               printlist.append(decryptrotshift(i, inputkey)) #appends encrypted character to a list
                if inputkey >2:
                  inputkey = 1 #resets input key if its 3 or greater
                else:
@@ -191,5 +236,16 @@ while quit == 0:
           for i in printlist:
              ptext += i #turns above list into variable
           print('Your decrypted message is',ptext+'.')
+        if encryptordecrypt == 'e' and shiftorswap == 'shift':
+            inputmess = input('enter the message you want to encrypt: ') #User enters message
+            inputkey = int(input(
+                'Enter the encryption key (whole numbers only and 26 and any multiples of 26 result in no encryption.)')) # user enters key.
+            print('your encrypted message is', encryptshift(
+                inputmess, inputkey), 'with the key', inputkey) #Runs function
+        if encryptordecrypt == 'd' and shiftorswap == 'shift':
+            inputmess = input('enter the message you want to decrypt: ')
+            inputkey = int(input(
+                'Enter the encryption key (whole numbers only and no more than 26 and no negatives.)'))
+            print('your decrypted message is', decryptshift(inputmess, inputkey))
     except:
-        print('An error has occured, please try again from the top. Remember No symbols or numbers in the message.') #Error handling
+        print('An unknown error has occured, please try again from the top. Remember No symbols or numbers in the message.') #Error handling
