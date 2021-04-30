@@ -1,5 +1,5 @@
 # Cryptopgraphy assignment
-# Ver 1.1
+# Ver 2.0 NOW WITH ROTATING CYPHER
 # By Nikolai
 
 #Defining dictionaries.
@@ -150,8 +150,8 @@ def swap(text):
     return rtext
 quit = 0
 while quit == 0:
-        inputmess = ('')
-    #try:
+    inputmess = ('')
+    try:
         print('NOTE: no symbols or numbers in your message.') #Warning
         shiftorswap = input(
             'Would you like to use shift or swap algorithim for encryption or decryption? or quit? (shift/swap/q for quit) ')
@@ -191,5 +191,5 @@ while quit == 0:
           for i in printlist:
              ptext += i #turns above list into variable
           print('Your decrypted message is',ptext+'.')
-    #except:
+    except:
         print('An error has occured, please try again from the top. Remember No symbols or numbers in the message.') #Error handling
