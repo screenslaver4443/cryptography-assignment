@@ -1,5 +1,5 @@
 # Cryptopgraphy assignment
-# Ver 2.0 NOW WITH ROTATING CYPHER
+# Ver 2.1 NOW WITH ROTATING CYPHER
 # By Nikolai
 
 #Defining dictionaries.
@@ -113,6 +113,7 @@ def encryptshift(text, key):
             #^^^ the above while loops make sure the numbers dont go beyond the alphabet.
             texttc = dic2[textn] #converts the shifted number back into a letter via the second dictionary.
             rtext += texttc #Appends the encrypted character to the final message.
+    return rtext
 
 
 def decryptshift(text, key):
@@ -133,7 +134,7 @@ def decryptshift(text, key):
             #^^^ the above while loops make sure the numbers dont go beyond the alphabet.
             texttc = dic2[textn] #converts the shifted number back into a letter via the second dictionary.
             rtext += texttc #Appends the decrypted character to the final message.
-        return rtext
+    return rtext
 def encryptrotshift(text, key):
     rtext = '' # defining the variable so that python doesn't get angry and throw a hissy fit.
     for i in text:
@@ -237,15 +238,26 @@ while quit == 0:
              ptext += i #turns above list into variable
           print('Your decrypted message is',ptext+'.')
         if encryptordecrypt == 'e' and shiftorswap == 'shift':
-            inputmess = input('enter the message you want to encrypt: ') #User enters message
-            inputkey = int(input(
-                'Enter the encryption key (whole numbers only and 26 and any multiples of 26 result in no encryption.)')) # user enters key.
-            print('your encrypted message is', encryptshift(
-                inputmess, inputkey), 'with the key', inputkey) #Runs function
+            inputmess = input('enter the message you want to encrypt(No symbols or numbers): ') #User enters message
+            while True:
+                try:
+                    inputkey = int(input(
+                       'Enter the encryption key (whole numbers only and 26 and any multiples of 26 result in no encryption.)')) # user enters key.
+                except:
+                  print("Invalid Number")
+                  continue
+                break
+            print('your encrypted message is', encryptshift(inputmess, inputkey), 'with the key', inputkey) #Runs function
         if encryptordecrypt == 'd' and shiftorswap == 'shift':
             inputmess = input('enter the message you want to decrypt: ')
-            inputkey = int(input(
-                'Enter the encryption key (whole numbers only and no more than 26 and no negatives.)'))
+            while True:
+                try:
+                    inputkey = int(input(
+                       'Enter the encryption key (whole numbers only and 26 and any multiples of 26 result in no encryption.)')) # user enters key.
+                except:
+                   print("Invalid Number")
+                   continue
+                break
             print('your decrypted message is', decryptshift(inputmess, inputkey))
     except:
         print('An unknown error has occured, please try again from the top. Remember No symbols or numbers in the message.') #Error handling
